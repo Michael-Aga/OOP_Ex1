@@ -24,6 +24,7 @@ def getCalls(calls):
             c = Call(elevator_str=row[0], time=row[1], source=row[2],
                      destination=row[3], state=row[4], assign=row[5])
             callsQuantity.append(c)
+            
         file.close
 
         return callsQuantity
@@ -36,6 +37,7 @@ def allocateElevator(callsCsv):
 
 def out(outputName, callsCsv):
     new_list = []
+    
     for call in callsCsv:
         new_list.append(call.__dict__.values())
 
