@@ -4,15 +4,20 @@ import csv
 from Building import *
 from Calls import *
 from Elevators import *
+from AllocateElevator import *
 
 
-def getBuilding(building):
-    with open(building, "r+") as file:
-
+def getBuilding(buildingName):
+    with open(buildingName, "r+") as file:
         buildingDict = json.load(file)
-        file.close()
+        minFloor = buildingDict.get("_minFloor")
+        maxFloor = buildingDict.get("_maxFloor")
 
-        return Buildings(buildingDict)
+        elevatorsQuantity = []
+        for elevator in buildingDict.get("_elevators"):
+            elevatorsQuantity.append(Elevator(elevator))
+
+        return Building(minFloor, maxFloor, elevatorsQuantity)
 
 
 def getCalls(calls):
@@ -24,20 +29,13 @@ def getCalls(calls):
             c = Call(elevator_str=row[0], time=row[1], source=row[2],
                      destination=row[3], state=row[4], assign=row[5])
             callsQuantity.append(c)
-            
-        file.close
 
         return callsQuantity
 
 
-def allocateElevator(callsCsv):
-    for call in callsCsv:
-        call.assign = 0
-
-
 def out(outputName, callsCsv):
     new_list = []
-    
+
     for call in callsCsv:
         new_list.append(call.__dict__.values())
 
@@ -49,8 +47,9 @@ def out(outputName, callsCsv):
 if __name__ == '__main__':
     buildingJson = sys.argv[1]
     callsCsv = sys.argv[2]
-    outputName = sys.argv[3]
+    #outputName = sys.argv[3]
     b1 = getBuilding(buildingJson)
     c1 = getCalls(callsCsv)
-    allocateElevator(c1)
-    out(outputName, c1)
+    #out(outputName, c1)
+
+    allocateElevator(b1, c1)
