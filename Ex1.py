@@ -5,7 +5,6 @@ from building import *
 from call import *
 from elevator import *
 from allocate_elevator import *
-import pandas as pd
 
 
 def getBuilding(buildingName):
