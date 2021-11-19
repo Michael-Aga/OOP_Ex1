@@ -11,12 +11,14 @@ class AllocateElevator:
         self.elevators = building._elevators
 
     def find_the_best_elevator(self):
+        # find the best elevator by going over all the calls 
         for call in self.calls:
             pick = self.pick_elevator(call.time, call.source, call.destination)
 
         return pick
 
     def calculate_execution_time(self, elevator: Elevator, calls: list):
+        #calculate the sum of the time it takes for every elevator to complete the run
         last_position = 0
         sum_of_time = 0
         time = 0
@@ -30,6 +32,7 @@ class AllocateElevator:
         return sum_of_time
 
     def calculate_every_elevators_time(self, elevator2calls: dict):
+        #give the sum of how much time it will take for all the elevators to complete the calls
         sum = 0
         for elevator, calls in elevator2calls.items():
             sum += self.calculate_execution_time(elevator, calls)
@@ -37,6 +40,7 @@ class AllocateElevator:
         return sum
 
     def find_best_allocation(self):
+        #find the best allocation from 10000 cases 
         min_dict = float('inf')
         best_dict = {}
 
@@ -50,6 +54,7 @@ class AllocateElevator:
         return best_dict
 
     def converte_dict_to_index(self, best_dict: dict):
+        #converte the dict we get to a list and sort them
         all_calls = []
         for elevator, calls in best_dict.items():
             for c in calls:
@@ -59,6 +64,7 @@ class AllocateElevator:
         return all_calls
 
     def generate_random_allocation(self):
+        #Generate the allocations 
         allocation = {}
         for elevator in self.elevators:
             allocation[elevator] = []
@@ -70,6 +76,7 @@ class AllocateElevator:
         return allocation
 
     def total_time(self, elevator: Elevator, source, destination, last_position):
+        #Calculate the time it takes for the elevator to complete its run
         speed = float((elevator.getSpeed()))
         close_time = float(elevator.getCloseTime())
         open_time = float(elevator.getOpenTime())

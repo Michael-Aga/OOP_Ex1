@@ -7,7 +7,6 @@ from elevator import *
 from allocate_elevator import *
 
 
-
 def getBuilding(buildingName):
     try:
         with open(buildingName, "r+") as file:
