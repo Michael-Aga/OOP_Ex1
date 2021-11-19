@@ -17,5 +17,8 @@ We will define this algorithm for a general number of elevators when we already 
 #run locally
 
 Open cmd in your folder - you can do it by click on the folder path on the top window and type cmd.
-Type Ex1.py <json building path> <csv calls path> <csv output path>. Example: Ex1.py .\Ex1_Buildings\B5.json .\Ex1_Calls\Calls_a.csv out.csv.
+Type Ex1.py 'json building path' "csv calls path' 'csv output path'. Example: Ex1.py .\Ex1_Buildings\B5.json .\Ex1_Calls\Calls_a.csv out.csv .
 You can see the file has been created and changed column F in the excel. (Elevator column).
+
+
+![image](https://user-images.githubusercontent.com/88629415/142696903-9a59ce54-4eb5-4651-b341-807ecc614d96.png)
