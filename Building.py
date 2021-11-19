@@ -1,13 +1,11 @@
-from Elevators import *
-class Buildings:
-    def __init__(self, BuildingQualities) -> None:
-        self._minFloor = BuildingQualities.get("_minFloor")
-        self._maxFloor = BuildingQualities.get("_maxFloor")
-        self._elevators = BuildingQualities.get("_elevators")
-        
-        elevatorsQuantity = []
-        for elevator in self._elevators:
-            elevatorsQuantity = elevatorsQuantity.append(Elevator(elevator))
-        
-def __repr__(self) -> str:
-    return f"minFloor: {self._minFloor} maxFloor: {self._maxFloor} elevators: {self.elevatorsQuantity}"
+from elevator import Elevator
+
+
+class Building:
+    def __init__(self, minFloor: int, maxFloor: int, elevators: Elevator) -> None:
+        self._minFloor = minFloor
+        self._maxFloor = maxFloor
+        self._elevators = elevators
+
+    def __repr__(self) -> str:
+        return f"minFloor: {self._minFloor} maxFloor: {self._maxFloor} elevators: {self._elevators}"
