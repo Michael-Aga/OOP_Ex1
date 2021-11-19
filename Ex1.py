@@ -1,23 +1,28 @@
 import sys
 import json
 import csv
-from Building import *
-from Calls import *
-from Elevators import *
-from AllocateElevator import *
+from building import *
+from call import *
+from elevator import *
+from allocate_elevator import *
+import pandas as pd
 
 
 def getBuilding(buildingName):
-    with open(buildingName, "r+") as file:
-        buildingDict = json.load(file)
-        minFloor = buildingDict.get("_minFloor")
-        maxFloor = buildingDict.get("_maxFloor")
+    try:
+        with open(buildingName, "r+") as file:
+            elevatorsQuantity = []
+            buildingDict = json.load(file)
+            minFloor = buildingDict.get("_minFloor")
+            maxFloor = buildingDict.get("_maxFloor")
 
-        elevatorsQuantity = []
-        for elevator in buildingDict.get("_elevators"):
-            elevatorsQuantity.append(Elevator(elevator))
+            for elevator in buildingDict.get("_elevators"):
+                elevatorsQuantity.append(Elevator(elevator))
 
-        return Building(minFloor, maxFloor, elevatorsQuantity)
+    except FileNotFoundError as e:
+        print(e)
+
+    return Building(minFloor, maxFloor, elevatorsQuantity)
 
 
 def getCalls(calls):
@@ -33,23 +38,20 @@ def getCalls(calls):
         return callsQuantity
 
 
-def out(outputName, callsCsv):
-    new_list = []
+def print_to_csv(outputName, calls: list):
+    with open(outputName, 'w+', newline='') as csv_file:
+        wr = csv.writer(csv_file, delimiter=',')
 
-    for call in callsCsv:
-        new_list.append(call.__dict__.values())
-
-    with open(outputName, "w", newline="") as file:
-        csvWriter = csv.writer(file)
-        csvWriter.writerows(new_list)
+        for call in calls:
+            wr.writerow(call.iter())
 
 
 if __name__ == '__main__':
     buildingJson = sys.argv[1]
     callsCsv = sys.argv[2]
-    #outputName = sys.argv[3]
+    outputName = sys.argv[3]
     b1 = getBuilding(buildingJson)
     c1 = getCalls(callsCsv)
-    #out(outputName, c1)
-
-    allocateElevator(b1, c1)
+    find = AllocateElevator(b1, c1)
+    print_to_csv(outputName, find.converte_dict_to_index(
+        find.find_best_allocation()))
