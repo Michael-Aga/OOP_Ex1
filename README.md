@@ -14,7 +14,7 @@ We will define this algorithm for a general number of elevators when we already 
 # UML
 ![image](https://user-images.githubusercontent.com/88629415/142693208-a8c9ac7b-b1fd-4801-95a7-f44ba8cca8d8.png)
 
-#run locally
+# run locally
 
 Open cmd in your folder - you can do it by click on the folder path on the top window and type cmd.
 Type Ex1.py 'json building path' "csv calls path' 'csv output path'. Example: Ex1.py .\Ex1_Buildings\B5.json .\Ex1_Calls\Calls_a.csv out.csv .
